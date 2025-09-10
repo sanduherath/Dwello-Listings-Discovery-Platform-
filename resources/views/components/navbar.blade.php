@@ -33,17 +33,50 @@
                     </svg>
                 </a>
             @else
-                <a href="{{ route('profile') }}" class="text-coffee hover:text-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z" />
-                    </svg>
-                </a>
+                <div x-data="{ open: false }" class="relative">
+                    <button @click="open = !open" class="text-coffee hover:text-black focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z" />
+                        </svg>
+                    </button>
+
+                    <!-- Profile dropdown -->
+                    <div x-show="open" @click.away="open = false" x-cloak
+                        class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-lg p-4 text-sm text-coffee">
+                        @php $u = auth()->user(); @endphp
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-rose rounded-full flex items-center justify-center text-white font-bold">{{ strtoupper(substr($u->name,0,1)) }}</div>
+                            <div>
+                                <div class="font-semibold">{{ $u->name }}</div>
+                                <div class="text-xs text-coffee/70">{{ $u->email }}</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="text-xs text-coffee/70">Role</div>
+                            <div class="font-medium">{{ $u->role }}</div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button @click="open = false"
+                                class="w-full px-3 py-2 bg-rose text-coffee rounded-lg hover:opacity-90">Close</button>
+                        </div>
+                    </div>
+                </div>
             @endguest
 
-            <a href="{{ route('register') }}" class="px-4 py-2 bg-coffee text-cream rounded-lg hover:bg-black">Sign
-                up</a>
+            {{-- Show Sign up for guests, Logout button for authenticated users --}}
+            @guest
+                <a href="{{ route('register') }}" class="px-4 py-2 bg-coffee text-cream rounded-lg hover:bg-black">Sign
+                    up</a>
+            @else
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 bg-coffee text-cream rounded-lg hover:bg-black">Logout</button>
+                </form>
+            @endguest
         </div>
 
         <!-- Mobile hamburger -->
@@ -62,7 +95,14 @@
                 @else
                     <a href="{{ route('profile') }}" class="block px-4 py-2 text-coffee">Profile</a>
                 @endguest
-                <a href="{{ route('register') }}" class="block px-4 py-2 text-coffee">Sign up</a>
+                @guest
+                    <a href="{{ route('register') }}" class="block px-4 py-2 text-coffee">Sign up</a>
+                @else
+                    <form method="POST" action="{{ route('logout') }}" class="px-4">
+                        @csrf
+                        <button type="submit" class="w-full text-left block px-4 py-2 bg-coffee text-cream rounded-lg hover:bg-black">Logout</button>
+                    </form>
+                @endguest
             </div>
         </div>
     </div>

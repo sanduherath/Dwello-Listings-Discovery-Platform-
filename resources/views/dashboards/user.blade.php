@@ -9,9 +9,7 @@
                 <p class="text-coffee/80 mt-2">Manage your profile, view saved properties, and connect with agents.</p>
             </div>
             <div class="flex items-center gap-4">
-                <form method="POST" action="{{ route('logout') }}">@csrf
-                    <button class="px-4 py-2 bg-coffee text-cream rounded-lg hover:bg-black">Logout</button>
-                </form>
+                {{-- Logout moved to navbar to keep one consistent control --}}
             </div>
         </div>
     </section>

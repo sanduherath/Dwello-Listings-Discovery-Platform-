@@ -13,9 +13,7 @@
             <div class="mb-4">
                 <span class="font-semibold">Role:</span> {{ $user->role }}
             </div>
-            <form method="POST" action="{{ route('logout') }}"> @csrf
-                <button class="px-4 py-2 rounded bg-red-500 text-white">Logout</button>
-            </form>
+            {{-- Logout moved to navbar for consistency --}}
         </div>
     </div>
 @endsection
