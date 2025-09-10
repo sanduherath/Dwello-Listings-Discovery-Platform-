@@ -206,7 +206,7 @@
         <div x-data="{
             current: 0,
             testimonials: [{
-                    img: '/img/b1.jpg',
+                    img: '/img/b4.jpg',
                     userImg: '/img/p1.jpg',
                     name: 'Sarah Nguyen',
                     city: 'San Francisco',
@@ -234,7 +234,7 @@
                                                     guided me through every step of the process. I couldn’t be happier with my new home!`
                 },
                 {
-                    img: '/img/b4.jpg',
+                    img: '/img/b1.jpg',
                     userImg: '/img/p4.jpg',
                     name: 'Emily Johnson',
                     city: 'Los Angeles',
