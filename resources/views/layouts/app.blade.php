@@ -14,9 +14,7 @@
     {{-- Navbar component --}}
     @include('components.navbar')
 
-    <main class="pt-24 bg-cream"> {{-- pt-24 to avoid fixed header overlap --}}
-        @yield('content')
-    </main>
+   
 
     {{-- put scripts at bottom --}}
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
